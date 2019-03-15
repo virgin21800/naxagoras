@@ -17,32 +17,13 @@
 					<a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
 				</li>
 
-				{% for onglet in onglets %}
-				<li class="nav-item mx-1 dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{ onglet }}
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						{% for rubrique in rubriques %}
-						{% if rubrique.ongletParent == onglet %}
-						<a class="dropdown-item" href="#">{{ rubrique.nom }}</a>
-						{% endif %}
-						{% endfor %}
-					</div>
-				</li>
-				{% endfor %}
-				<li class="nav-item mx-1">
-					{% if app.user %}
-					<a class="nav-link" href="/logout">Déconnection<span class="sr-only">(current)</span></a>
-					{% else %}
-					<a class="nav-link" href="/login">Connection<span class="sr-only">(current)</span></a>
-					{% endif %}
-				</li>
-			</ul>
+		</ul>
 		</div>
 		</li>
 		</ul>
 		</div>
 	</nav>
+	{{ dump(menu) }}
+	{{ dump(rubriques) }}
+	{{ dump(dump) }}
 </header>
