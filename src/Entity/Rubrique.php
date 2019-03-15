@@ -84,6 +84,11 @@ class Rubrique
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     /**
      * @return Collection|Categorie[]
      */

@@ -38,9 +38,15 @@ class Categorie
      */
     private $sousCategories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Page", mappedBy="categorie")
+     */
+    private $pages;
+
     public function __construct()
     {
         $this->sousCategories = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,6 +90,11 @@ class Categorie
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     /**
      * @return Collection|SousCategorie[]
      */
@@ -109,6 +120,37 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($sousCategory->getCategorieParente() === $this) {
                 $sousCategory->setCategorieParente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Page[]
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(Page $page): self
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(Page $page): self
+    {
+        if ($this->pages->contains($page)) {
+            $this->pages->removeElement($page);
+            // set the owning side to null (unless already changed)
+            if ($page->getCategorie() === $this) {
+                $page->setCategorie(null);
             }
         }
 
