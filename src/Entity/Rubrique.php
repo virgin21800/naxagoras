@@ -26,7 +26,7 @@ class Rubrique
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $onglet_parent;
+    private $rubrique_parente;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -36,7 +36,7 @@ class Rubrique
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Categorie", mappedBy="rubrique_parente")
      */
-    private $categories;
+    private $rubriques;
 
     public function __construct()
     {
@@ -60,14 +60,14 @@ class Rubrique
         return $this;
     }
 
-    public function getOngletParent(): ?string
+    public function getRubriqueParente(): ?Rubrique
     {
-        return $this->onglet_parent;
+        return $this->rubrique_parente;
     }
 
-    public function setOngletParent(string $onglet_parent): self
+    public function setRubriqueParente(Rubrique $rubrique_parente): self
     {
-        $this->onglet_parent = $onglet_parent;
+        $this->rubrique_parente = $rubrique_parente;
 
         return $this;
     }
@@ -90,11 +90,11 @@ class Rubrique
     }
 
     /**
-     * @return Collection|Categorie[]
+     * @return Collection|Rubrique[]
      */
-    public function getCategories(): Collection
+    public function getRubrique(): Collection
     {
-        return $this->categories;
+        return $this->rubriques;
     }
 
     public function addCategory(Categorie $category): self

@@ -33,37 +33,26 @@
 						{% if loop.index >= 3 %}
 						{% if rubrique|length > 0 and rubrique|length == 2 %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ rubrique.item.route }}">{{ rubrique.item.nom }}</a>
+							<a class="nav-link" href="{{ rubrique.rubrique.route }}">{{ rubrique.rubrique.nom }}</a>
 						</li>
+						
 						{% else %}
 						<li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label">{{ rubrique.item.nom }}</span><span class="caret"></span></a>
-								<ul class="dropdown-menu">
-										{% for categorie in rubrique %}
-										{% if loop.index >= 3 %}
-										{% if categorie|length > 0 and categorie|length == 2 %}
-										<li class="nav-item">
-											<a class="nav-link" href="{{ categorie.item.route }}">{{ categorie.item.nom }}</a>
-										</li>
-										{% else %}
-										<li class="dropdown-submenu">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label">{{ categorie.item.nom }}</span><span class="caret"></span></a>
-												<ul class="dropdown-menu">
-														{% for sous_categorie in categorie %}
-														{% if loop.index >= 3 %}
-														<li class="nav-item">
-																<a class="nav-link" href="{{ sous_categorie.item.route }}">{{ sous_categorie.item.nom }}</a>
-														</li>
-														{% endif %}
-														{% endfor %}
-												</ul>
-										</li>
-										{% endif %}
-										{% endif %}
-										{% endfor %}
-								</ul>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label"></span><span class="caret"></span></a>
 						</li>
+						
+						{% for categorie in rubrique %}
+							{% if loop.index >= 3 %}
+							<li class="nav-item">
+								<a class="nav-link" href=""></a>
+							</li>
+							{% endif %}
+						{% endfor %}
+
+
+
 						{% endif %}
+						
 						{% endif %}
 						{% endfor %}
 				{% endif %}
@@ -76,4 +65,5 @@
 		</div>
 	</nav>
 	{{ dump(menu) }}
+	{{ dump(rubriques) }}
 </header>
