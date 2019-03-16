@@ -12,55 +12,61 @@ class NavigationController extends AbstractController
 
     public function showMenuAction()
     {
-        $onglets = array('Qui sommes-nous ?', 'Nos services', 'Nos produits');
-        
-        $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
-        $sous_categories = $this->getDoctrine()->getRepository(SousCategorie::class)->findAll();
+        $onglets = array(
+            array(
+                'nom' => 'Qui sommes-nous ?',
+                'route' => 'notre_société/'
+            ),
+            array(
+                'nom' => 'Nos services',
+                'route' => 'nos_services/'
+            ),
+            array(
+                'nom' => 'Nos produits',
+                'route' => 'nos_produits/'
+            )
+        );
 
         $menu = [];
         $menu = $onglets;
-        $rubriques = [];
-        $dump = "";
-
         foreach ($onglets as $key_onglet => $onglet) {
-            $menu[$key_onglet] = [$onglet => []];
-            $rubriques = $this->getDoctrine()->getRepository(Rubrique::class)->findItems($onglet);
-            foreach ($rubriques as $key_rubrique => $rubrique) {
-                $menu[$key_onglet][$key_rubrique] = [$rubrique->getNom() => []];
-                //$menu[$key_onglet] = [$onglet => [1 => 'toto']];
-                //$menu[$key_onglet] = [$onglet => [2 =>'kiki']];
-                $dump = $menu[0];
-                //$menu = [$menu[$key_onglet] => [$rubrique => $rubrique->getNom()]];
+            $rubriques = $this->getDoctrine()->getRepository(Rubrique::class)->findBy(['onglet_parent' => $onglet]);
+            if (count($rubriques) > 0) {
+                foreach ($rubriques as $key_rubrique => $rubrique) {
+                    $menu[$key_onglet][$key_rubrique] = [
+                        'item' => [
+                            'nom' => $rubrique->getNom(),
+                            'route' => $rubrique->getUrl()
+                        ]
+                    ];
+                    $categories = $this->getDoctrine()->getRepository(Categorie::class)->findBy(['rubrique_parente' => $rubrique]);
+                    if (count($categories) > 0) {
+                        foreach ($categories as $key_categorie => $categorie) {
+                            $menu[$key_onglet][$key_rubrique][$key_categorie] = [
+                                'item' => [
+                                    'nom' => $categorie->getNom(),
+                                    'route' => $categorie->getUrl()
+                                ]
+                            ];
+                            $sous_categories = $this->getDoctrine()->getRepository(SousCategorie::class)->findBy(['categorie_parente' => $categorie]);
+                            if (count($sous_categories) > 0) {
+                                foreach ($sous_categories as $key_ss_categorie => $sous_categorie) {
+                                    $menu[$key_onglet][$key_rubrique][$key_categorie][$key_ss_categorie] = [
+                                        'item' => [
+                                            'nom' => $sous_categorie->getNom(),
+                                            'route' => $sous_categorie->getUrl()
+                                        ]
+                                    ];
+                                }
+                            }
+                        }
+                    }
+                }
+                
             }
-                // foreach ($rubriques as $key_rubrique => $rubrique) {
-                //     if ($rubrique->getOngletParent() === $onglet) {
-                //         $menu[$key_onglet][$key_rubrique] = "Toto";//$rubriques[$key_rubrique]->getNom();
-                //         if (!empty($categories)) {
-                //             foreach ($categories as $key_categorie => $categorie) {
-                //                 if ($categorie->getRubriqueParente() === $rubrique) {
-                //                     $menu[$key_onglet][$key_rubrique]=$categories[$key_categorie]->getNom();
-                //         //             if (!empty($sous_categories)) {
-                //         //                 foreach ($sous_categories as $key_sous_categorie => $sous_categorie) {
-                //         //                     if ($sous_categorie->getCategorieParente()->getId() === $categorie->getId()) {
-                //         //                         $menu[$onglet][$rubrique][$categorie] = [
-                //         //                             $key_sous_categorie => $sous_categorie->getNom()
-                //         //                         ];
-                //         //                     }
-                //         //                 }
-                //         //             }
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
         }
         return $this->render('navigation/menu.html.twig', [
-            'onglets' => $onglets,
-            'rubriques' => $rubriques,
-            'categories' => $categories,
-            'sous_categories' => $sous_categories,
-            'menu' => $menu,
-            'dump' => $dump
+            'menu' => $menu
         ]);
     }
 }

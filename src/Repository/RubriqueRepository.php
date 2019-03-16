@@ -19,20 +19,6 @@ class RubriqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Rubrique::class);
     }
 
-    /**
-     * @return Rubrique[] Returns an array of Rubrique objects
-     */
-    public function findItems($nom){
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.onglet_parent = :val')
-            ->setParameter('val', $nom)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     // /**
     //  * @return Rubrique[] Returns an array of Rubrique objects
     //  */
