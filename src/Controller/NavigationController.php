@@ -26,6 +26,7 @@ class NavigationController extends AbstractController
                 'route' => 'nos_produits/'
             )
         );
+        $rubriques="";
 
         $menu = [];
         $menu = $onglets;
@@ -34,7 +35,7 @@ class NavigationController extends AbstractController
             if (count($rubriques) > 0) {
                 foreach ($rubriques as $key_rubrique => $rubrique) {
                     $menu[$key_onglet][$key_rubrique] = [
-                        'item' => [
+                        $rubrique->getNom() => [
                             'nom' => $rubrique->getNom(),
                             'route' => $rubrique->getUrl()
                         ]
@@ -42,31 +43,21 @@ class NavigationController extends AbstractController
                     $categories = $this->getDoctrine()->getRepository(Categorie::class)->findBy(['rubrique_parente' => $rubrique]);
                     if (count($categories) > 0) {
                         foreach ($categories as $key_categorie => $categorie) {
-                            $menu[$key_onglet][$key_rubrique][$key_categorie] = [
-                                'item' => [
+                            $menu[$key_onglet][$key_rubrique][$rubrique->getNom()] = [
+                                $categorie->getNom() => [
                                     'nom' => $categorie->getNom(),
                                     'route' => $categorie->getUrl()
                                 ]
                             ];
-                            $sous_categories = $this->getDoctrine()->getRepository(SousCategorie::class)->findBy(['categorie_parente' => $categorie]);
-                            if (count($sous_categories) > 0) {
-                                foreach ($sous_categories as $key_ss_categorie => $sous_categorie) {
-                                    $menu[$key_onglet][$key_rubrique][$key_categorie][$key_ss_categorie] = [
-                                        'item' => [
-                                            'nom' => $sous_categorie->getNom(),
-                                            'route' => $sous_categorie->getUrl()
-                                        ]
-                                    ];
-                                }
-                            }
                         }
                     }
                 }
-                
             }
         }
         return $this->render('navigation/menu.html.twig', [
-            'menu' => $menu
+
+            'menu' => $menu,
+            'rubriques' => $rubriques
         ]);
     }
 }
