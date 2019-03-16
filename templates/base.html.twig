@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     {% endblock %}
 </head>
 
@@ -15,8 +18,12 @@
         'App\\Controller\\NavigationController::showMenuAction'
     )) }}
     {% block body %}
+    
+
+
     {% endblock %}
-    {% block javascripts %}
+    {{ include('navigation/footer.html.twig') }}
+        {% block javascripts %}
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
