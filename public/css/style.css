@@ -1,0 +1,157 @@
+
+/* body{
+    background-color: rgb(255, 255, 255);
+} */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+section{
+    height: 100vh;
+}
+
+h1, h2 {
+	font-family: 'Jura';
+}
+.h1, h1{
+      font-size: 3.5rem !important;
+}
+
+.header{
+      background-image: linear-gradient(rgba(58,58,58,0.1), rgba(58,58,58,05)), url("../img/background-header-grey.jpg");
+      /* opacity: 0.6; */
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+.header p{
+      font-size: 1rem !important;
+}
+.header div{
+      position: absolute;
+      top: 40vh;
+      color: white;
+      text-align: center;
+      width: 100%;
+}
+h2{
+    padding-top: 10vh;
+    text-align: center;
+    font-size: 2.5rem !important;
+    color: #DC3545;
+}
+p{
+    text-align: center;
+    color: #DC3545;
+}
+
+section .line{
+	-webkit-animation-name: moveBar;
+	-webkit-animation-duration: 10s;
+	animation-name: moveBar;
+	animation-duration: 10s;
+	-webkit-transform: skew(-40deg);
+	-moz-transform: skew(-40deg);
+	-o-transform: skew(-40deg);
+	transform: skew(-40deg);
+	position: relative;
+	z-index: 999;
+	-ms-transform: skew(-40deg);
+}
+
+#one{
+    width: 5vw;
+    height: 20vh;
+    animation: moveBar 5s linear infinite;
+    transform: skew(-40deg) translateY(-1000px);
+    -webkit-box-shadow: 100px 509px rgb(58,58,58);
+    -moz-box-shadow:  20px 300px rgb(58,58,58);
+    box-shadow: -120px 150px rgb(58,58,58);
+    -webkit-animation: moveBar 5s linear infinite;
+    -webkit-transform: skew(-40deg) translateY(-1000px);
+    -moz-transform: skew(-40deg) translateY(-1000px);
+    -ms-transform: skew(-40deg) translateY(-1000px);
+    -o-transform: skew(-40deg) translateY(-1000px);
+}
+#two{
+    width: 10px;
+    height: 300px;
+    animation: moveBar 5s linear infinite;
+    transform: skew(-40deg) translateY(-1000px);
+    -webkit-box-shadow: 250px 450px #DC3545;
+    -moz-box-shadow:  -50px 200px  #DC3545;
+    box-shadow: -150px 100px #DC3545;
+    -webkit-animation: moveBar 5s linear infinite;
+}
+
+#three{
+    width: 10px;
+    height: 500px;
+    animation: moveBar 5s linear infinite;
+    transform: skew(-40deg) translateY(-1000px);
+    -webkit-box-shadow: 70px 500px #7B5C83;
+    -moz-box-shadow:  -100px 200px  rgb(167, 167, 167);
+    box-shadow: -150px 100px rgb(167, 167, 167);
+    -webkit-animation: moveBar 5s linear infinite;
+}
+
+@keyframes moveBar{
+	100% {transform: skew(-40deg) translateY(-1000px)};
+}
+
+#tagsList {position:relative; width:600px; height:600px; margin: -50px auto; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:rgb(170, 168, 168); font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color: #DC3545; letter-spacing:2px;}
+
+.cloudword{
+    background-color: white;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+    background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+    background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+}
+
