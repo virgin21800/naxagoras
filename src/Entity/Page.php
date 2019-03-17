@@ -20,17 +20,6 @@ class Page
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="pages")
-     */
-    private $categorie;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SousCategorie", inversedBy="pages")
-     */
-    private $sous_categorie;
-
     
     public function getId(): ?int
     {
@@ -45,30 +34,6 @@ class Page
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getSousCategorie(): ?SousCategorie
-    {
-        return $this->sous_categorie;
-    }
-
-    public function setSousCategorie(?SousCategorie $sous_categorie): self
-    {
-        $this->sous_categorie = $sous_categorie;
 
         return $this;
     }
