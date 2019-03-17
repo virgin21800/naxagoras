@@ -30,6 +30,11 @@ class Page
      * @ORM\Column(type="string", length=10000, nullable=true)
      */
     private $contenu;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
     
     public function getId(): ?int
     {
@@ -73,6 +78,18 @@ class Page
     public function setContenu(?string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

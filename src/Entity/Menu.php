@@ -43,10 +43,22 @@ class Menu
      */
     private $pages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="menu")
+     */
+    private $produits;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="menu")
+     */
+    private $services;
+
     public function __construct()
     {
         $this->enfants = new ArrayCollection();
         $this->pages = new ArrayCollection();
+        $this->produits = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,6 +163,68 @@ class Menu
             // set the owning side to null (unless already changed)
             if ($page->getMenu() === $this) {
                 $page->setMenu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setMenu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->produits->removeElement($produit);
+            // set the owning side to null (unless already changed)
+            if ($produit->getMenu() === $this) {
+                $produit->setMenu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Service[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+            $service->setMenu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->contains($service)) {
+            $this->services->removeElement($service);
+            // set the owning side to null (unless already changed)
+            if ($service->getMenu() === $this) {
+                $service->setMenu(null);
             }
         }
 
