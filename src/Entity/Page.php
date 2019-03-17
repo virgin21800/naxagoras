@@ -20,6 +20,16 @@ class Page
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="pages")
+     */
+    private $menu;
+
+    /**
+     * @ORM\Column(type="string", length=10000, nullable=true)
+     */
+    private $contenu;
     
     public function getId(): ?int
     {
@@ -41,5 +51,29 @@ class Page
     public function __toString()
     {
         return $this->titre;
+    }
+
+    public function getMenu(): ?Menu
+    {
+        return $this->menu;
+    }
+
+    public function setMenu(?Menu $menu): self
+    {
+        $this->menu = $menu;
+
+        return $this;
+    }
+
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu(?string $contenu): self
+    {
+        $this->contenu = $contenu;
+
+        return $this;
     }
 }

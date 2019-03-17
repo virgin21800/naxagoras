@@ -38,9 +38,15 @@ class Menu
      */
     private $enfants;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Page", mappedBy="menu")
+     */
+    private $pages;
+
     public function __construct()
     {
         $this->enfants = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +120,37 @@ class Menu
             // set the owning side to null (unless already changed)
             if ($enfant->getParent() === $this) {
                 $enfant->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Page[]
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(Page $page): self
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->setMenu($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(Page $page): self
+    {
+        if ($this->pages->contains($page)) {
+            $this->pages->removeElement($page);
+            // set the owning side to null (unless already changed)
+            if ($page->getMenu() === $this) {
+                $page->setMenu(null);
             }
         }
 

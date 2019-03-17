@@ -24,16 +24,28 @@
 						{% for item in menuitem.enfants %}
 						{% if item.enfants|length > 0 %}
 						<li class="dropdown-submenu">
-
-
 							<a class="dropdown-item dropdown-toggle" href="#">
 							{{ item.nom }}
 							</a>
 							<ul class="dropdown-menu">
-
-							{% for link in item.enfants %}
-							<li><a class="dropdown-item" href="{{ menuitem.route }}{{ item.route }}{{ link.route }}">{{ link.nom }}</a></li>
-							{% endfor %}
+								{% for link in item.enfants %}
+								{% if link.enfants|length > 0 %}
+								<li class="dropdown-submenu">
+									<a class="dropdown-item dropdown-toggle" href="#">
+									{{ link.nom }}
+									</a>
+									<ul class="dropdown-menu">
+									{% for i in link.enfants %}
+										<li>
+											<a class="dropdown-item" href="{{ menuitem.route }}{{ item.route }}{{ link.route }}{{ i.route }}">{{ i.nom }}</a>
+										</li>
+									{% endfor %}
+									</ul>
+								</li>
+								{% elseif link.enfants|length == 0 %}
+								<li><a class="dropdown-item" href="{{ menuitem.route }}{{ item.route }}{{ link.route }}">{{ link.nom }}</a></li>
+								{% endif %}
+								{% endfor %}
 							</ul>
 						</li>
 						{% elseif item.enfants|length == 0 %}
