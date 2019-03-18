@@ -50,18 +50,18 @@
 </header> #}
 
 <header>
-
+	<div class="masthead text-center">
+		<a class="navbar-brand" href="/">
+			<img src="{{ asset('img/naxagoras.png') }}" width="100%" class="d-inline-block align-top mx-3"
+				alt="Naxagoras-Technology'">
+		</a>
+	</div>
 	<!-- La barre de navigation -->
 	<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light z-depth-2 mb-5">
-                <a class="navbar-brand " href="#"><img src="{{ asset('img/naxagoras.png') }}" width="80" height="30" alt="Naxagoras"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-	{# <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light z-depth-2 mb-5">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button> #}
+		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				{% for menuitem in menu %}
@@ -75,39 +75,39 @@
 						{% for item in menuitem.enfants %}
 						{% if item.enfants|length > 0 %}
 						<li class="dropdown-submenu">
-							<a class="dropdown-item dropdown-toggle" href="#">
+							<a class="dropdown-item dropdown-toggle" href="">
 							{{ item.nom }}
 							</a>
 							<ul class="dropdown-menu">
 								{% for link in item.enfants %}
 								{% if link.enfants|length > 0 %}
 								<li class="dropdown-submenu">
-									<a class="dropdown-item dropdown-toggle" href="#">
+									<a class="dropdown-item dropdown-toggle" href="">
 									{{ link.nom }}
 									</a>
 									<ul class="dropdown-menu">
 									{% for i in link.enfants %}
 										<li>
-											<a class="dropdown-item" href="{{ i.route }}">{{ i.nom }}</a>
+											<a class="dropdown-item" href="/{{ menuitem.route }}{{ item.route }}{{ link.route }}{{ i.route }}">{{ i.nom }}</a>
 										</li>
 									{% endfor %}
 									</ul>
 								</li>
 								{% elseif link.enfants|length == 0 %}
-								<li><a class="dropdown-item" href="{{ link.route }}">{{ link.nom }}</a></li>
+								<li><a class="dropdown-item" href="/{{ menuitem.route }}{{ item.route }}{{ link.route }}">{{ link.nom }}</a></li>
 								{% endif %}
 								{% endfor %}
 							</ul>
 						</li>
 						{% elseif item.enfants|length == 0 %}
-							<li class="nav-item mx-1"><a class="nav-link" href="{{ item.route }}">{{ item.nom }}</a>
+							<li class="nav-item mx-1"><a class="nav-link" href="/{{ menuitem.route }}{{ item.route }}">{{ item.nom }}</a>
 							</li>
 						{% endif %}
 						{% endfor %}
 					</ul>
 				</li>
 				{% elseif menuitem.parent is null %}
-				<li class="nav-item mx-1"><a class="nav-link" href="{{ menuitem.route }}">{{ menuitem.nom }}</a></li>
+				<li class="nav-item mx-1"><a class="nav-link" href="/{{ menuitem.route }}">{{ menuitem.nom }}</a></li>
 				{% endif %}
 				{% endfor %}
 			</ul>

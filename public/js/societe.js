@@ -1,4 +1,4 @@
-$(document).ready(function($){
+jQuery(document).ready(function($){
 	var timelines = $('.cd-horizontal-timeline'),
 		eventsMinDistance = 60;
 
@@ -83,7 +83,7 @@ $(document).ready(function($){
 
 		if ( newContent.length > 0 ) { //if there's a next/prev event - show it
 			var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
-				newEvent = ( string == 'next' ) ? selectedDate.parent('div').next('div').children('a') : selectedDate.parent('li').prev('li').children('a');
+				newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
 			
 			updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
 			updateVisibleContent(newEvent, timelineComponents['eventsContent']);
@@ -200,7 +200,7 @@ $(document).ready(function($){
 		element.style["transform"] = property+"("+value+")";
 	}
 
-
+	//based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
 	function parseDate(events) {
 		var dateArrays = [];
 		events.each(function(){
@@ -211,16 +211,16 @@ $(document).ready(function($){
 	    return dateArrays;
 	}
 
-
+	function parseDate2(events) {
 		var dateArrays = [];
 		events.each(function(){
 			var singleDate = $(this),
 				dateComp = singleDate.data('date').split('T');
-			if( dateComp.length > 0 ) { //both DD/MM/YEAR and time are provided
+			if( dateComp.length > 1 ) { //both DD/MM/YEAR and time are provided
 				var dayComp = dateComp[0].split('/'),
 					timeComp = dateComp[1].split(':');
 			} else if( dateComp[0].indexOf(':') >=0 ) { //only time is provide
-				var dayComp = ["2005", "0", "0"],
+				var dayComp = ["2000", "0", "0"],
 					timeComp = dateComp[0].split(':');
 			} else { //only DD/MM/YEAR
 				var dayComp = dateComp[0].split('/'),
@@ -230,7 +230,7 @@ $(document).ready(function($){
 			dateArrays.push(newDate);
 		});
 	    return dateArrays;
-
+	}
 
 	function daydiff(first, second) {
 	    return Math.round((second-first));
@@ -246,6 +246,10 @@ $(document).ready(function($){
 		return Math.min.apply(null, dateDistances);
 	}
 
+	/*
+		How to tell if a DOM element is visible in the current viewport?
+		http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+	*/
 	function elementInViewport(el) {
 		var top = el.offsetTop;
 		var left = el.offsetLeft;
@@ -269,5 +273,5 @@ $(document).ready(function($){
 	function checkMQ() {
 		//check if mobile or desktop device
 		return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
-    }
+	}
 });

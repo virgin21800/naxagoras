@@ -9,26 +9,45 @@ use App\Entity\Menu;
 
 class PageController extends AbstractController{
 
-/**
- * @Route("/produits/secteurs/nanomateriaux")
+    /**
+    * @Route("/{menu}/{sous_menu}/{route}")
     */
-    public function showPage($menu){
-    // $route='produits/secteurs/nanomateriaux/';
+    public function showPageSousMenu($menu, $sous_menu, $route){
 
-    // $menu = $this->getDoctrine()->getRepository(Menu::class)->findBy(['route' => $route ]);
-    // $page = $this->getDoctrine()->getRepository(Page::class)->findBy(['menu' => $menu ]);
+        $chemin = $menu.$sous_menu.$route;
+        $itemMenu = $this->getDoctrine()->getRepository(Menu::class)->findBy(['route' => $chemin]);
+        $page = $this->getDoctrine()->getRepository(Page::class)->findBy(['menu' => $itemMenu]);
 
-        $menu_parent = $this->getDoctrine()->getRepository(Page::class)->findBy(['menu' => $menu->getMenu()]);
-        $chemin = $menu_parent->getDoctrine()->getRepository(Menu::class)->findBy(['route'=> $route]);
-        // $menu = $this->getDoctrine()->getRepository(Menu::class)->findBy(['route' => $route ]);
-        
+        return $this->render('page/page.html.twig', [
+            'page' => $page
+        ]);
+    }
 
-        //$page = $this->getDoctrine()->getRepository(Page::class)->findAll();
-        var_dump($chemin);
+    /**
+    * @Route("/{menu}/{route}")
+    */
+    public function showPageMenu($menu, $route){
 
-        // return $this->render('page/page.html.twig', [
-        //     'page' => $page
-        // ]);
+        $chemin = $menu.$route;
+        $itemMenu = $this->getDoctrine()->getRepository(Menu::class)->findBy(['route' => $chemin]);
+        $page = $this->getDoctrine()->getRepository(Page::class)->findBy(['menu' => $itemMenu]);
+
+        return $this->render('page/page.html.twig', [
+            'page' => $page
+        ]);
+    }
+
+    /**
+    * @Route("/produits/secteurs/{route}")
+    */
+    public function showProduitsSecteurs($route){
+
+        $menu = $this->getDoctrine()->getRepository(Menu::class)->findBy(['route' => $route]);
+        $page = $this->getDoctrine()->getRepository(Page::class)->findBy(['menu' => $menu]);
+
+        return $this->render('page/page.html.twig', [
+            'page' => $page
+        ]);
     }
 
 /**
