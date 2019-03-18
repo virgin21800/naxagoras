@@ -3,12 +3,23 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Proxies\__CG__\App\Entity\Menu;
+use App\Entity\Menu;
 
 class NavigationController extends AbstractController
 {
 
-    public function showMenuAction()
+    /**
+     * @Route("/navigation", name="navigation")
+     */
+    public function index()
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $menu = $this->getDoctrine()->getRepository(Menu::class)->findAll();
+        return $this->render('navigation/index.html.twig', array('menu' => $menu));
+    }
+    
+    public function afficher()
     {
 
         $menu = $this->getDoctrine()->getRepository(Menu::class)->findAll();
