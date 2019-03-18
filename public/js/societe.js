@@ -200,7 +200,7 @@ $(document).ready(function($){
 		element.style["transform"] = property+"("+value+")";
 	}
 
-	//based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+
 	function parseDate(events) {
 		var dateArrays = [];
 		events.each(function(){
