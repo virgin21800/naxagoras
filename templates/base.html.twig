@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
+    {% block stylesheets %} {% endblock %}
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {% endblock %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+   
 </head>
 
 <body>
@@ -15,7 +16,9 @@
         'App\\Controller\\NavigationController::showMenuAction'
     )) }}
     {% block body %}
+    <a class="nav-link" href="{{ path('contact') }}">Contact</a> 
     {% endblock %}
+    <footer>{{ include('navigation/footer.html.twig') }}</footer>
     {% block javascripts %}
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -30,3 +33,6 @@
 </body>
 
 </html>
+ 
+
+ 
