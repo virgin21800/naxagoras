@@ -1,54 +1,3 @@
-{# <header>
-	<div class="masthead text-center">
-		<a class="navbar-brand" href="/">
-			<img src="{{ asset('img/naxagoras.png') }}" width="100%" class="d-inline-block align-top mx-3"
-				alt="Naxagoras-Technology'">
-		</a>
-	</div>
-	<!-- La barre de navigation -->
-	<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light z-depth-2 mb-5">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mx-auto">
-				<li class="nav-item mx-1 active">
-					<a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item mx-1 active">
-					<a class="nav-link" href="/societe">Qui sommes-nous ?</a>
-				</li>
-				{% for onglet in onglets %}
-				<li class="nav-item mx-1 dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{ onglet }}
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						{% for rubrique in rubriques %}
-						{% if rubrique.ongletParent == onglet %}
-						<a class="dropdown-item" href="#">{{ rubrique.nom }}</a>
-						{% endif %}
-						{% endfor %}
-					</div>
-				</li>
-				{% endfor %}
-				<li class="nav-item mx-1">
-					{% if app.user %}
-					<a class="nav-link" href="/logout">Déconnection<span class="sr-only">(current)</span></a>
-					{% else %}
-					<a class="nav-link" href="/login">Connection<span class="sr-only">(current)</span></a>
-					{% endif %}
-				</li>
-			</ul>
-		</div>
-		</li>
-		</ul>
-		</div>
-	</nav>
-</header> #}
-
 <header>
 
 	<!-- La barre de navigation -->
@@ -57,11 +6,11 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-	{# <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light z-depth-2 mb-5">
+	<!-- {# <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light z-depth-2 mb-5">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button> #}
+		</button> #} -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				{% for menuitem in menu %}

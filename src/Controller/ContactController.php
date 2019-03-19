@@ -43,7 +43,6 @@ class ContactController extends AbstractController
                    'text/plain'
                )
            ;
-var_dump($message);
           $mailer->send($message);
 
           return $this->redirectToRoute('contact');
